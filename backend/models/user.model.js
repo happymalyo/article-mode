@@ -1,19 +1,21 @@
-const mongoose =  require('mongoose');
+const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema(
-{
-    username: {
+const userSchema = new Schema({
+    name: {
         type: String,
         required: true,
-        unique: true,
-        trim: true,
-        minlength: 3
+        trim: true
+    }, 
+
+    photo: {
+        type: String
     },
-}, 
-{
-    timestamps: true,
+
+    birthdate: {
+        type: String
+    }
 });
 
 const User = mongoose.model('User', userSchema);

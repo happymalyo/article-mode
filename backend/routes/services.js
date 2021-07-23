@@ -34,8 +34,6 @@ router.route('/update/:id').post((req, res) => {
             service.ville = req.body.ville;
             service.adresse = req.body.adresse;
             service.email = req.body.email;
-            service.titre_note = req.body.titre_note;
-            service.contenus_note = req.body.contenus_note;
 
             service.save()
             .then(() => res.json('Service updated'))
@@ -54,8 +52,6 @@ router.route('/add').post((req, res) => {
             const email = req.body.email;
             const ville = req.body.ville;
             const adresse = req.body.adresse;
-            const titre_note = req.body.titre_note;
-            const contenus_note = req.body.contenus_note;
     
     const newService = new Service(
         {
@@ -67,9 +63,7 @@ router.route('/add').post((req, res) => {
             phone,
             email,
             ville,
-            adresse,
-            titre_note,
-            contenus_note
+            adresse
         }
     );
 

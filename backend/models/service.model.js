@@ -7,13 +7,11 @@ const serviceSchema = new Schema({
     sous_categorie: {type: String, required: true},
     image: {type: String, required: true},
     description: {type: String, required: true},
-    site_web: {type: String, required: true},
+    site_web: {type: String},
     phone: {type: String, required: true},
     ville:{type: String, default:"Fianarantsoa"},
     adresse: {type: String, required: true},
-    email: {type: String, unique: true, required: true},
-    titre_note: {type: String},
-    contenus_note: {type: String}
+    email: {type: String, unique: true, required: true}
 });
 
 const Service = mongoose.model('Service', serviceSchema);
