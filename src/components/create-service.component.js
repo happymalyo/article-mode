@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const CreateService = () => {
     const [newService, setNewService] = useState(
         {
+        title:"",
         categorie: "",
         sous_categorie: "",
         image: "",
@@ -29,7 +31,15 @@ const CreateService = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(newService)
+        const data = JSON.stringify(newService);
+        console.log(data)
+        fetch('http://localhost:5000/services/add', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(newService)
+        }).then(_ => {
+            console.log('new blog added');
+        })
     }
 
     const handleChange = (e) => {
@@ -37,7 +47,7 @@ const CreateService = () => {
     }
 
     const handlePhoto = (e) => {
-        setNewService({...newService, image: e.target.files[0]});
+        setNewService({...newService, image: "img.jpg"});
         setPicture(URL.createObjectURL(e.target.files[0]) );
     }
 
@@ -51,6 +61,18 @@ const CreateService = () => {
 
 			<form onSubmit={handleSubmit} class="shadow-xl px-5 py-5" encType='multipart/form-data'>
                 <div class="flex flex-wrap -mx-3 mb-6">
+                <label class={classStyle.label} for="title">
+                    Title
+                    </label>
+                    <input aria-label="Enter title"
+                    type="text" placeholder="Title"
+                    id="title"
+                    class={classStyle.input}
+                    name="title"
+                    value={newService.title}
+                    onChange={handleChange} 
+                    
+                    />
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class={classStyle.label} for="grid-state">
                         Categorie
@@ -105,6 +127,36 @@ const CreateService = () => {
                     onChange={handleChange} 
                     required
                     ></textarea>
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class={classStyle.label} for="adresse">
+                    Adresse
+                    </label>
+                    <input aria-label="Enter l'url de votre site web"
+                    type="text" placeholder="domaine site web (facultatif)"
+                    id="adresse"
+                    class={classStyle.input}
+                    name="adresse"
+                    value={newService.adresse}
+                    onChange={handleChange} 
+                    
+                    />
+                    </div>
+                    <div class="w-full md:w-1/2 px-3">
+                    <label class={classStyle.label} for="email">
+                    email
+                    </label>
+                    <input aria-label="Enter your email"
+                    type="email" placeholder="email"
+                    id="email"
+                    class={classStyle.input} 
+                    name="email"
+                    value={newService.email}
+                    onChange={handleChange} 
+                    required
+                    />
+                    </div>
+                </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class={classStyle.label} for="site_web">

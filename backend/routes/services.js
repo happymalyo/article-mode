@@ -25,6 +25,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
     Service.findById(req.params.id)
         .then((service) => {
+            service.title = req.body.title;
             service.categorie = req.body.categorie;
             service.sous_categorie = req.body.sous_categorie;
             service.image = req.body.image;
@@ -40,9 +41,10 @@ router.route('/update/:id').post((req, res) => {
             .catch(err => res.status().json('Error: '+err));
         })
         .catch(err => res.status(400).json('Error: '+err));
-});
+}); 
 
-router.route('/add').post((req, res) => {
+router.route('/add').post(async (req, res) => {
+            const title = req.body.title;
             const categorie = req.body.categorie;
             const sous_categorie = req.body.sous_categorie;
             const image = req.body.image;
@@ -55,6 +57,7 @@ router.route('/add').post((req, res) => {
     
     const newService = new Service(
         {
+            title,
             categorie,
             sous_categorie,
             image,
@@ -63,13 +66,18 @@ router.route('/add').post((req, res) => {
             phone,
             email,
             ville,
-            adresse
+            adresse 
         }
     );
 
-    newService.save()
-        .then(() => res.json('Service added!'))
-        .catch(err => res.status(400).json('Error: '+ err));
+   const serviceSaved = await newService.save();
+   try{
+        const saved = await serviceSaved.save();
+        res.json(saved);
+    }catch(err){
+        res.json({message : err});
+    }
+        
 });
 
 module.exports = router;
