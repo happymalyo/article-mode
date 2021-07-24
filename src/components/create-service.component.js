@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const CreateService = () => {
     const [newService, setNewService] = useState(
@@ -27,19 +26,32 @@ const CreateService = () => {
         selectIcon: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
     };
 
-   
+    const axios = require("axios").create({
+        timeout: 120000, // 2 min
+        baseURL:'http://localhost:5000'
+    });
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = JSON.stringify(newService);
-        console.log(data)
-        fetch('http://localhost:5000/services/add', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newService)
-        }).then(_ => {
-            console.log('new blog added');
-        })
+    const datas = (data, arg = "application/json") => {
+        if (arg === "application/json") {
+            return JSON.stringify(data);
+        } else if (arg === "multipart/form-data") {
+            const formData = new FormData();
+            Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+            });
+            return formData;
+        } else {
+            return data;
+        }
+    };
+
+    async function postPhoto(params) {
+        return await axios({
+            method: "POST",
+            url: "/services/add",
+            data: datas(params, "multipart/form-data"),
+            headers: { 'Access-Control-Allow-Origin': true }
+        });
     }
 
     const handleChange = (e) => {
@@ -47,9 +59,27 @@ const CreateService = () => {
     }
 
     const handlePhoto = (e) => {
-        setNewService({...newService, image: "img.jpg"});
+        setNewService({...newService, image: e.target.files[0]});
         setPicture(URL.createObjectURL(e.target.files[0]) );
     }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+       postPhoto(newService);
+        // axios('http://localhost:5000/services/add', {
+        //     method: 'POST',
+        //     headers: {
+        //         Accept: 'application/form-data'
+        //     },
+        //     body: data
+        // }).then(_ => {
+        //     console.log('new blog added');
+        // })
+
+       
+    }
+
+   
 
     return (
         <div className="create-service">

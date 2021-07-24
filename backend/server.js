@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
- 
+  
 //Set up default mongoose connection
 var mongoDB = process.env.MONGODB_URI;
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});

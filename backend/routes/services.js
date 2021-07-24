@@ -1,5 +1,9 @@
 const router = require('express').Router();
 let Service = require('../models/service.model');
+const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
+let path = require('path');
+
 
 router.route('/').get((req, res) => {
     Service.find()
@@ -43,41 +47,30 @@ router.route('/update/:id').post((req, res) => {
         .catch(err => res.status(400).json('Error: '+err));
 }); 
 
-router.route('/add').post(async (req, res) => {
-            const title = req.body.title;
-            const categorie = req.body.categorie;
-            const sous_categorie = req.body.sous_categorie;
-            const image = req.body.image;
-            const description = req.body.description;
-            const site_web = req.body.site_web;
-            const phone = req.body.phone;
-            const email = req.body.email;
-            const ville = req.body.ville;
-            const adresse = req.body.adresse;
-    
-    const newService = new Service(
-        {
-            title,
-            categorie,
-            sous_categorie,
-            image,
-            description,
-            site_web,
-            phone,
-            email,
-            ville,
-            adresse 
-        }
-    );
-
-   const serviceSaved = await newService.save();
-   try{
-        const saved = await serviceSaved.save();
-        res.json(saved);
-    }catch(err){
-        res.json({message : err});
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'images');
+    },
+    filename: function(req, file, cb) {   
+        cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
     }
-        
+});
+
+const fileFilter = (req, file, cb) => {
+    const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if(allowedFileTypes.includes(file.mimetype)) {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
+
+let upload = multer({ storage, fileFilter });
+
+router.route('/add').post(upload.single('image'),async (req, res) => {
+            
+            console.log(req.file.filename)
+         
 });
 
 module.exports = router;

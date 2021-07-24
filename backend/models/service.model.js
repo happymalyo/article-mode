@@ -3,16 +3,16 @@ const mongoose =  require('mongoose');
 const Schema = mongoose.Schema;
 
 const serviceSchema = new Schema({
-    title: {type: String, required: true},
-    categorie: {type: String, required: true},
-    sous_categorie: {type: String, required: true},
-    image: {type: String, required: true},
-    description: {type: String, required: true},
+    title: {type: String},
+    categorie: {type: String},
+    sous_categorie: {type: String},
+    image: {type: String},
+    description: {type: String},
     site_web: {type: String},
-    phone: {type: String, required: true},
+    phone: {type: String},
     ville:{type: String, default:"Fianarantsoa"},
-    adresse: {type: String, required: true},
-    email: {type: String, unique: true, required: true}
+    adresse: {type: String},
+    email: {type: String, unique: true}
 });
 
 const Service = mongoose.model('Service', serviceSchema);
