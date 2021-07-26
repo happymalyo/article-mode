@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
+import { useParams } from "react-router";
+import {Link} from 'react-router-dom';
 
-const CreateService = () => {
+
+const EditService = () => {
     const [newService, setNewService] = useState(
         {
         title:"",
@@ -16,8 +19,9 @@ const CreateService = () => {
         }
     );
     const [picture, setPicture] = useState('');
+    const [service, setService] = useState('');
     const history = useHistory();
-    
+    const {id} = useParams();
 
     const classStyle = {
         label: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
@@ -52,10 +56,11 @@ const CreateService = () => {
             method: "POST",
             url: "/services/add",
             data: datas(params, "multipart/form-data"),
-            headers: { 'Access-Control-Allow-Origin': true }
+            headers: { 'Access-Control-Allow-Origin': true } 
         });
         return result;
     }
+
 
     const handleChange = (e) => {
         setNewService({...newService, [e.target.name]: e.target.value});
@@ -72,7 +77,18 @@ const CreateService = () => {
         history.push('/services/dashboard');
     };
 
+    
+    axiosProvider({
+        method: "GET",
+        url: "/services/60fe6cd667db542568429e15",
+        headers: { 'Access-Control-Allow-Origin': true }
+    }).then((res) => {
+        return res.json()
+    }).then((data) => setService(data))
+    
    
+    
+
 
     return (
         <div className="create-service">
@@ -240,4 +256,4 @@ const CreateService = () => {
     );
 }
  
-export default CreateService;
+export default EditService;

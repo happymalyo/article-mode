@@ -9,6 +9,8 @@ import Navbar from './components/navbar.component';
 import ServiceList from './components/service-list.component';
 import NavbarAdmin from "./components/navbar-admin.component";
 import CreateService from "./components/create-service.component";
+import EditService from "./components/edit-service.component";
+import ServiceDetails from "./components/service-details.component";
 
 function App() {
   return (
@@ -63,6 +65,14 @@ function App() {
             <Route path="/services/dashboard">
             <NavbarAdmin />
              <ServiceList />
+            </Route>
+            <Route path="/services/:id">
+             <NavbarAdmin />
+             <ServiceDetails />
+            </Route> 
+            <Route path="/edit/:id">
+             <NavbarAdmin />
+             <EditService />
             </Route> 
         </Switch>
     </Router>
