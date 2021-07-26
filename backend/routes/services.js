@@ -49,7 +49,7 @@ router.route('/update/:id').post((req, res) => {
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, 'images');
+        cb(null, '../public/img');
     },
     filename: function(req, file, cb) {   
         cb(null, uuidv4() + '-' + Date.now() + path.extname(file.originalname));
@@ -68,9 +68,26 @@ const fileFilter = (req, file, cb) => {
 let upload = multer({ storage, fileFilter });
 
 router.route('/add').post(upload.single('image'),async (req, res) => {
-            
-            console.log(req.file.filename)
-         
+    
+    const service = new Service({
+       title : req.body.title,
+       categorie : req.body.categorie,
+       sous_categorie : req.body.sous_categorie,
+       image : req.file.filename,
+       description : req.body.description,
+       site_web : req.body.site_web,
+       phone : req.body.phone,
+       email : req.body.email,
+       ville : req.body.ville,
+       adresse : req.body.adresse
+    });
+
+    try{
+        const serviceSaved = await service.save();
+        res.json("Service added"); 
+    }catch(err){
+        res.json({message : err});
+    }
 });
 
 module.exports = router;

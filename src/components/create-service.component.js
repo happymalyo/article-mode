@@ -26,7 +26,7 @@ const CreateService = () => {
         selectIcon: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
     };
 
-    const axios = require("axios").create({
+    const axiosProvider = require("axios").create({
         timeout: 120000, // 2 min
         baseURL:'http://localhost:5000'
     });
@@ -45,13 +45,14 @@ const CreateService = () => {
         }
     };
 
-    async function postPhoto(params) {
-        return await axios({
+    const sendService = async (params) => {
+        const result =  await axiosProvider({
             method: "POST",
             url: "/services/add",
             data: datas(params, "multipart/form-data"),
             headers: { 'Access-Control-Allow-Origin': true }
         });
+        return result;
     }
 
     const handleChange = (e) => {
@@ -65,19 +66,8 @@ const CreateService = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-       postPhoto(newService);
-        // axios('http://localhost:5000/services/add', {
-        //     method: 'POST',
-        //     headers: {
-        //         Accept: 'application/form-data'
-        //     },
-        //     body: data
-        // }).then(_ => {
-        //     console.log('new blog added');
-        // })
-
-       
-    }
+        sendService(newService)
+    };
 
    
 
@@ -105,7 +95,7 @@ const CreateService = () => {
                     />
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class={classStyle.label} for="grid-state">
-                        Categorie
+                        Categories
                         </label>
                         <div class="relative mb-2">
                             <select class={classStyle.select} id="grid-state"
@@ -114,9 +104,10 @@ const CreateService = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                <option>New Mexico</option>
-                                <option>Missouri</option>
-                                <option>Texas</option>
+                                <option value="">selectionnez...</option>
+                                <option value="education">Education</option>
+                                <option value="home_service">Service Maison</option>
+                                <option value="sport-loisir">Sports et Loisirs</option>
                             </select>
                             <div class={classStyle.selectIcon}>
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -134,9 +125,13 @@ const CreateService = () => {
                                 onChange={handleChange}
                                 required
                             >
-                                <option>New Mexico</option>
-                                <option>Missouri</option>
-                                <option>Texas</option>
+                                <option value="">selectionnez...</option>
+                                <option value="universite" className="uppercase">universite</option>
+                                <option value="lycee" className="uppercase">lycee</option>
+                                <option value="formation" className="uppercase">formation</option>
+                                <option value="electricien" className="uppercase">electricien</option>
+                                <option value="reparation_phone" className="uppercase">reparation de telephone</option>
+                                <option value="danse_club" className="uppercase">Club de danse</option>
                             </select>
                             <div class={classStyle.selectIcon}>
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
@@ -229,7 +224,7 @@ const CreateService = () => {
                     required
                     />
                     <div className="previewProfilePic w-1/4 md:w-1/2" >
-                        <img className="playerProfilePic_home_tile w-1/4 " src={picture && picture}></img>
+                        <img className="playerProfilePic_home_tile w-1/4 " alt="img insight" src={picture && picture}></img>
                     </div>
                 
                 <button type="submit"

@@ -31,9 +31,11 @@ app.use('/users', usersRouter);
 app.use('/services', servicesRouter);
 
 app.get('/', (req, res) => {
-  res.send('Hey all');
+  res.send('No route for this my dear!');
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on port: ${port}`);
-});
+try{
+  app.listen(port)
+}catch(err){
+  console.log(err)
+}

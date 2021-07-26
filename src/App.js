@@ -6,12 +6,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import beach_image from './img/beach-work.jpg';
 
 import Navbar from './components/navbar.component';
-import ExerciseList from './components/exercises-list.component';
-import EditExercise from './components/edit-exercise.component';
-import CreateExercise from './components/create-exercise.component';
-import CreateUser from './User';
-import ServiceList from './components/service.component';
-import Register from './components/image-upload';
+import ServiceList from './components/service-list.component';
 import NavbarAdmin from "./components/navbar-admin.component";
 import CreateService from "./components/create-service.component";
 
@@ -20,17 +15,8 @@ function App() {
     <Router>
         
         <Switch>
+            
             <Route exact path="/">
-              <Navbar />
-              <ExerciseList />
-            </Route>
-            <Route path="/create">
-              <Navbar />
-              <Register />
-            </Route>
-            {/*<Route path="/user" component = {CreateUser} /> }
-            <Route path="/services" component = {ServiceList} /> */}
-            <Route path="/products">
             <Navbar />
             <div class="bg-gray-200 flex justify-center" >
                 <div class="max-w-md sm:max-w-xl lg:max-w-full mx-0 lg:py-5 lg:px-5">
@@ -74,6 +60,10 @@ function App() {
              <NavbarAdmin />
              <CreateService />
             </Route>
+            <Route path="/services/dashboard">
+            <NavbarAdmin />
+             <ServiceList />
+            </Route> 
         </Switch>
     </Router>
   );
