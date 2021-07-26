@@ -15,7 +15,7 @@ function App() {
     <Router>
         
         <Switch>
-            
+        
             <Route exact path="/">
             <Navbar />
             <div class="bg-gray-200 flex justify-center" >
@@ -57,8 +57,8 @@ function App() {
               </div>
             </Route>
             <Route path="/services/create">
-             <NavbarAdmin />
-             <CreateService />
+              <NavbarAdmin />
+              <CreateService />
             </Route>
             <Route path="/services/dashboard">
             <NavbarAdmin />

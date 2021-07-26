@@ -102,7 +102,6 @@ const CreateService = () => {
                                 name="categorie"
                                 value={newService.categorie}
                                 onChange={handleChange}
-                                required
                             >
                                 <option value="">selectionnez...</option>
                                 <option value="education">Education</option>
@@ -224,7 +223,7 @@ const CreateService = () => {
                     required
                     />
                     <div className="previewProfilePic w-1/4 md:w-1/2" >
-                        <img className="playerProfilePic_home_tile w-1/4 " alt="img insight" src={picture && picture}></img>
+                        {picture && <img className="playerProfilePic_home_tile w-1/4 " alt="Votre logo" src={picture && picture}></img>}
                     </div>
                 
                 <button type="submit"
