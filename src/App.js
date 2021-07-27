@@ -66,11 +66,11 @@ function App() {
             <NavbarAdmin />
              <ServiceList />
             </Route>
-            <Route path="/services/:id">
+            <Route exact path="/services/:id">
              <NavbarAdmin />
              <ServiceDetails />
             </Route> 
-            <Route path="/edit/:id">
+            <Route exact path="/services/edit/:id">
              <NavbarAdmin />
              <EditService />
             </Route> 

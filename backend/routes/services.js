@@ -18,34 +18,19 @@ router.route('/:id').get((req, res) => {
         .catch(err => res.status(400).json('Error: '+err));
 });
 
+//Get one Service by Categorie
+router.route('/categorie/:cat').get((req, res) => {
+    Service.find({"sous_categorie":req.params.cat})
+        .then((service) => res.json(service))
+        .catch(err => res.status(400).json('Error: '+err));
+});
+
 //Delete
 router.route('/:id').delete((req, res) => {
     Service.findByIdAndDelete(req.params.id)
         .then(() => res.json('Service deleted'))
         .catch(err => res.status(400).json('Error: '+err));
 });
-
-//Update
-router.route('/update/:id').post((req, res) => {
-    Service.findById(req.params.id)
-        .then((service) => {
-            service.title = req.body.title;
-            service.categorie = req.body.categorie;
-            service.sous_categorie = req.body.sous_categorie;
-            service.image = req.body.image;
-            service.description = req.body.description;
-            service.site_web = req.body.site_web;
-            service.phone = req.body.phone;
-            service.ville = req.body.ville;
-            service.adresse = req.body.adresse;
-            service.email = req.body.email;
-
-            service.save()
-            .then(() => res.json('Service updated'))
-            .catch(err => res.status().json('Error: '+err));
-        })
-        .catch(err => res.status(400).json('Error: '+err));
-}); 
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -66,6 +51,31 @@ const fileFilter = (req, file, cb) => {
 }
 
 let upload = multer({ storage, fileFilter });
+
+//Update
+router.route('/update/:id').post(upload.single('image'), (req, res) => {
+    Service.findById(req.params.id)
+        .then((service) => {
+            service.title = req.body.title;
+            service.categorie = req.body.categorie;
+            service.sous_categorie = req.body.sous_categorie;
+            service.image = req.file.filename;
+            service.description = req.body.description;
+            service.site_web = req.body.site_web;
+            service.phone = req.body.phone;
+            service.ville = req.body.ville;
+            service.adresse = req.body.adresse;
+            service.email = req.body.email;
+
+            service.save().then(() => {
+                console.log('hey saved')
+            }).catch((err) => {
+                console.log(err)
+            })
+        })
+        .catch(err => res.status(400).json('Error: '+err));
+}); 
+
 
 router.route('/add').post(upload.single('image'),async (req, res) => {
     
@@ -88,6 +98,7 @@ router.route('/add').post(upload.single('image'),async (req, res) => {
     }catch(err){
         res.json({message : err});
     }
+       
 });
 
 module.exports = router;

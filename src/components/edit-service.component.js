@@ -1,25 +1,23 @@
 import React, { useState,useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
 import { useParams } from "react-router";
-import {Link} from 'react-router-dom';
 
 
 const EditService = () => {
     const [newService, setNewService] = useState(
         {
-        title:"",
-        categorie: "",
-        sous_categorie: "",
-        image: "",
-        description: "",
-        site_web: "",
-        phone: "",
-        adresse: "",
-        email: ""
+            title:"",
+            categorie: "",
+            sous_categorie: "",
+            image: "",
+            description: "",
+            site_web: "",
+            phone: "",
+            adresse: "",
+            email: ""
         }
     );
     const [picture, setPicture] = useState('');
-    const [service, setService] = useState('');
     const history = useHistory();
     const {id} = useParams();
 
@@ -54,13 +52,12 @@ const EditService = () => {
     const sendService = async (params) => {
         const result =  await axiosProvider({
             method: "POST",
-            url: "/services/add",
+            url: "/services/update/"+id,
             data: datas(params, "multipart/form-data"),
             headers: { 'Access-Control-Allow-Origin': true } 
         });
         return result;
     }
-
 
     const handleChange = (e) => {
         setNewService({...newService, [e.target.name]: e.target.value});
@@ -74,19 +71,26 @@ const EditService = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         sendService(newService)
+        
         history.push('/services/dashboard');
+        
     };
 
     
-    axiosProvider({
-        method: "GET",
-        url: "/services/60fe6cd667db542568429e15",
-        headers: { 'Access-Control-Allow-Origin': true }
-    }).then((res) => {
-        return res.json()
-    }).then((data) => setService(data))
-    
-   
+   useEffect(() => {
+        axiosProvider({
+            method: "GET",
+            url: "/services/"+id,
+            headers: { 'Access-Control-Allow-Origin': true }
+        }).then((res) => {
+            let stock = {}
+            Object.entries(res.data).forEach(([key, value]) => {
+                console.log(key, value)
+                stock = Object.assign({}, stock,{[key]:value})
+            })
+            setNewService(stock)
+        })
+   },[])
     
 
 
