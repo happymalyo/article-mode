@@ -108,7 +108,7 @@ const CreateService = () => {
                             >
                                 <option value="">selectionnez...</option>
                                 <option value="education">Education</option>
-                                <option value="home_service">Service Maison</option>
+                                <option value="home service">Service Maison</option>
                                 <option value="sport-loisir">Sports et Loisirs</option>
                             </select>
                             <div class={classStyle.selectIcon}>
@@ -132,8 +132,8 @@ const CreateService = () => {
                                 <option value="lycee" className="uppercase">lycee</option>
                                 <option value="formation" className="uppercase">formation</option>
                                 <option value="electricien" className="uppercase">electricien</option>
-                                <option value="reparation_phone" className="uppercase">reparation de telephone</option>
-                                <option value="danse_club" className="uppercase">Club de danse</option>
+                                <option value="reparation phone" className="uppercase">reparation de telephone</option>
+                                <option value="danse club" className="uppercase">Club de danse</option>
                             </select>
                             <div class={classStyle.selectIcon}>
                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>

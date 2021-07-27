@@ -1,7 +1,6 @@
 import useFetch from './useFetch';
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
 
 const Services = () => {
     const {data, isPending, error} = useFetch('http://localhost:5000/services');
@@ -35,7 +34,7 @@ const Services = () => {
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
             {services && services.map((service) => (
-            <div class={classStyle.container}>
+            <div class={classStyle.container}> 
             
                 <div class={classStyle.containerBox}>
                     
