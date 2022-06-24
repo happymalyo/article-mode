@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 require('dotenv/config');
 
 //Connect to DB
@@ -12,6 +13,7 @@ mongoose.connect(
 );   
 //Middlewares
 app.use(bodyParser.json());
+app.use(cors());
 
 //Product endpoint
 const productRouter = require('./routes/product.router');

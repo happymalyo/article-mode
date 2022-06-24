@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
-import HomePage from "./components/Home";
+import HomePage from "./components/home";
 import Footer from "./Footer";
 import NotFound from "./NotFound";
 import Product from './components/product-list.component';
