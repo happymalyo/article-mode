@@ -4,7 +4,7 @@ const HomePage = () => {
     return ( 
         <div className="main">
             <div class="header">
-                <h1><a href="index.html">Arti <span class="com">Mada</span></a></h1>
+                <h1><a href="index.html">Arti <span class="com">Mode</span></a></h1>
                 <nav>
                     <ul>
                         <li><a href="index.html">Accueil</a></li>

@@ -1,9 +1,9 @@
-import "./App.css";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import HomePage from "./components/Home";
 import Footer from "./Footer";
 import NotFound from "./NotFound";
+import Product from './components/product-list.component';
 
 function App() {
   return (
@@ -15,7 +15,9 @@ function App() {
             <HomePage />
             <Footer />
             </Route>
-          
+            <Route path="/admin">
+            <Product/>
+            </Route>
             <Route exact path="*">
                 <NotFound />
             </Route>
