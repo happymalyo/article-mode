@@ -1,33 +1,22 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.4;
+    color: #444;
+    background: #fff;
+    height: 100vh;
+  }
 
-.create {
-	max-width: 400px;
-	margin: 0 auto;
-}
-.create label {
-	text-align: left;
-	diplay: block;
-}
-.create h2 {
-	font-size: 20px;
-	color: #f1356d;
-	margin-bottom: 30px;
-	text-align: center;
-}
-.create input, .create textarea, .create select {
-	width: 100%;
-	padding: 6px 10px;
-	margin: 10px 0;
-	border: 1px solid #ddd;
-	box-sizing: border-box;/*Atteindre le width de box*/
-	display: block;
-	outline: none;
-}
-
-.create button {
-	background: #f1356d;
-	color: #fff;
-	border: 0;
-	padding: 8px;
-	border-radius: 8px;
-	cursor: pointer;
-}
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
