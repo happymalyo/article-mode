@@ -17,6 +17,13 @@ const Product = () => {
 			</h2>
             {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
+            {products && products.map((product) =>(
+                <div>
+                    <p>{product.article}</p>
+                    <p>{product.prix}</p>
+                    <p>{product.image}</p>
+                </div>
+            ))}
         </div>
     )
 }

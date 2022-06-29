@@ -1,35 +1,37 @@
 import {Link} from 'react-router-dom';
 import "../css/home.css";
+import useFetch from './useFetch';
+import {useState, useEffect} from 'react';
 import Header from './header';
 const HomePage = () => {
+    const {data, isPending, error} = useFetch('http://localhost:5000/produits');
+    const [products, setProduct] = useState("");
+
+    useEffect(() => {
+        data && setProduct(data)
+    }, [data])
+
+
     return ( 
         <div className="main">
             <Header />
+            {error && <div>{error}</div>}
+            {isPending && <div>Loading...</div>}
             <div className="container">
-                    <div class="card">
-                        <img src="../images/img1.jpg" alt="img1"/>
-                        <div class="artist">By <a href="#">John Elie</a></div>
-                        <div class="price">55.000 Ar</div>
-                        <div class="details"><a href="detailsFille.html">Details</a></div>
-                    </div>
-                    <div class="card">
-                        <img src="../images/img2.jpg" alt="img2"/>
-                        <div class="artist">By <a href="#">John Elie</a></div>
-                        <div class="price">55.000 Ar</div>
-                        <div class="details">Details</div>
-                    </div>
-                    <div class="card">
-                        <img src="../images/img3.jpg" alt="img3"/>
-                        <div class="artist">By <a href="#">John Elie</a></div>
-                        <div class="price">55.000 Ar</div>
-                        <div class="details">Details</div>
-                    </div>
-                    <div class="card">
-                        <img src="../images/img4.jpg" alt="img4"/>
-                        <div class="artist">By <a href="#">John Elie</a></div>
-                        <div class="price">55.000 Ar</div>
-                        <div class="details"><a href="#">Details</a></div>
-                    </div>
+                   {products && products.map((product) =>(
+                        <div class="card">
+                            {
+                                product.image &&
+                                <img
+                                src={`../images/${product.image}`} 
+                                alt={`${product.image}`}
+                                />
+                            }
+                            <div class="prod-infos">{product.article} de Marque <a href="#">{product.marque}</a></div>
+                            <div class="price">{product.prix}</div>
+                            <div class="details"><a href="detailsFille.html">Details</a></div>
+                        </div>
+                   ))}
             </div>
             <div class="links">
                     <div class="link"><img src="../icons/fb.png" alt="fb-icon" /></div>
