@@ -1,6 +1,7 @@
 import useFetch from './useFetch';
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
+import '../index.css';
 
 const Product = () => {
     const {data, isPending, error} = useFetch('http://localhost:5000/produits');

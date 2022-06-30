@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,300;0,400;1,200;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap');
+/* Base style */
+* {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  color: #333;
+}
 
+a {
+  text-decoration: none;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
+} 
   h1 a {
     color: #fe01b1;
   }
