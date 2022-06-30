@@ -13,7 +13,7 @@
 
 #back
 /backend/node_modules
-/backend/commands.md
+/commands.md
 
 # misc
 .DS_Store
