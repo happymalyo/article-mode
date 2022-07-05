@@ -5,7 +5,6 @@ const NotFound = () => {
         <div class="flex flex-col
         items-center justify-center">
             <div class="w-200 h-200 md:w-200 mx-auto py-6 text-center">
-             <img width="200" height="200" alt="not-found" src="../images/undraw_page_not_found_su7k.png" />
              <p class="leading-normal text-2xl mb-8">
                         Desolé, nous n'avons pas trouvé la page demandée
 
