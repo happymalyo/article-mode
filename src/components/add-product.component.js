@@ -69,7 +69,6 @@ const CreateProduct = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         await sendProduct(newProduct)
-        
         history.push('/admin');
     }
     return(
@@ -82,6 +81,20 @@ const CreateProduct = () => {
                 </p>
                 <p class="text-warning-500 uppercase">{newProduct.article}</p>
                 <form onSubmit={handleSubmit} className="shadow-xl px-5 py-5 w-2/4 sm:w-3/4" encType='multipart/form-data'>
+                    <label class={classStyle.label} for="image">
+                    Image
+                    </label>
+                    <input aria-label="Enter your image"
+                    type="file" 
+                    accept=".png, .jpg, .jpeg"
+                    onChange={handlePhoto}
+                    class="mb-2"
+                    name="image"
+                    required
+                    />
+                    <div className="previewProfilePic w-1/4 md:w-1/2" >
+                        {picture && <img className="playerProfilePic_home_tile w-1/4 " alt="Votre logo" src={picture && picture}></img>}
+                    </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <label class={classStyle.label} for="article">
                         Article
@@ -93,7 +106,7 @@ const CreateProduct = () => {
                         name="article"
                         value={newProduct.article}
                         onChange={handleChange} 
-                        
+                        required
                         />
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -107,6 +120,7 @@ const CreateProduct = () => {
                         name="couleur"
                         value={newProduct.couleur}
                         onChange={handleChange} 
+                        required
                         />
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -133,6 +147,7 @@ const CreateProduct = () => {
                         name="qualite"
                         value={newProduct.qualite}
                         onChange={handleChange} 
+                        required
                         />
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -146,11 +161,12 @@ const CreateProduct = () => {
                         name="taille"
                         value={newProduct.taille}
                         onChange={handleChange} 
+                        required
                         />
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
                         <label class={classStyle.label} for="prix">
-                        Prix
+                        Prix (AR)
                         </label>
                         <input aria-label="Enter prix"
                         type="text" placeholder="Prix"
@@ -159,6 +175,7 @@ const CreateProduct = () => {
                         name="prix"
                         value={newProduct.prix}
                         onChange={handleChange} 
+                        required
                         />
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -174,20 +191,7 @@ const CreateProduct = () => {
                         onChange={handleChange} 
                         />
                     </div>
-                    <label class={classStyle.label} for="image">
-                    Image
-                    </label>
-                    <input aria-label="Enter your image"
-                    type="file" 
-                    accept=".png, .jpg, .jpeg"
-                    onChange={handlePhoto}
-                    class="mb-2"
-                    name="image"
-                    required
-                    />
-                    <div className="previewProfilePic w-1/4 md:w-1/2" >
-                        {picture && <img className="playerProfilePic_home_tile w-1/4 " alt="Votre logo" src={picture && picture}></img>}
-                    </div>
+                    
                     <button type="submit"
                     class="bg-indigo-400 py-2 rounded-bl-lg w-full mt-4">
                     Enregistrer
