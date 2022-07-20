@@ -76,7 +76,7 @@ const CreateProduct = () => {
             <div class="flex flex-col
 					items-center">
                 <p class="text-indigo-500 text-xl uppercase tracking-wider mb-3 mt-5">
-                Ajout de nouveau Produit
+                Ajout de nouvel Article
                 <hr/>
                 </p>
                 <p class="text-warning-500 uppercase">{newProduct.article}</p>
