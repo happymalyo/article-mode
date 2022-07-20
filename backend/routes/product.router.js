@@ -68,20 +68,42 @@ router.post('/add', upload.single('image'),async (req, res) => {
 })
 
 //Update resource
-router.patch('/:id', async (req,res)=> {
-    try {
-        const id = req.params.id;
-        const data = req.body;
-        const options = { new: true };
+// router.patch('/update/:id', async (req,res)=> {
+//     try {
+//         const id = req.params.id;
+//         const data = req.body;
+//         const options = { new: true };
 
-        const dataUpdated = await Product.findByIdAndUpdate(
-            id, data, options
-        )
-        res.send(dataUpdated);
-    }catch(err){
-        res.json({message:err.message});
-    }
+//         const dataUpdated = await Product.findByIdAndUpdate(
+//             id, data, options
+//         )
+//         res.send(dataUpdated);
+//     }catch(err){
+//         res.json({message:err.message});
+//     }
+// })
+
+router.post('/update/:id', upload.single('image'),async (req, res) =>{
+    Product.findById(req.params.id)
+        .then((product) => {
+            product.article = req.body.article,
+            product.couleur = req.body.couleur,
+            product.image = req.file.filename,
+            product.marque = req.body.marque,
+            product.qualite = req.body.qualite,
+            product.taille = req.body.taille,
+            product.prix = req.body.prix,
+            product.type = req.body.type
+
+            product.save().then(() => {
+                console.log('hey updated')
+            }).catch((err) => {
+                console.log(err)
+            })
+        })
+        .catch(err => res.status(400).json('Error: '+err));
 })
+
 
 //Delete by ID Method
 router.delete('/:id', async (req, res) => {

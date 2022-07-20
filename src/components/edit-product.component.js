@@ -5,11 +5,7 @@ import { useParams } from "react-router";
 
 const EditProduct = () => {
 	const {id} = useParams();
-	const axiosProvider = require("axios").create({
-        timeout: 120000, // 2 min
-        baseURL:'http://localhost:5000'
-    });
-	const [product, setProduct] = useState(
+    const [newProduct, setNewProduct] = useState(
         {
             article: "",
             couleur: "",
@@ -21,6 +17,7 @@ const EditProduct = () => {
             type: "",
         }
     );
+
 	useEffect(() => {
         axiosProvider({
             method: "GET",
@@ -33,10 +30,69 @@ const EditProduct = () => {
                 data = Object.assign({},data,{[key]:value})
             })
 			
-			setProduct(data)
-			console.log('list product',product)
+			setNewProduct(data)
+			console.log('list product',newProduct)
         })
    },[])
+
+   const classStyle = {
+    label: "block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2",
+    select: "block appearance-none w-full bg-gray-200 border  border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+    input:`text-sm text-gray-base w-full
+    mr-3 py-5 px-4 h-3 focus:outline-none border-b-2 border-gray-200
+    border-gray-200 mb-2`,
+    selectIcon: "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+};
+
+
+
+const [picture, setPicture] = useState('');
+const history = useHistory();
+
+const handleChange = (e) => {
+    setNewProduct({...newProduct,[e.target.name] : e.target.value}) //Object.assign(target,data)
+}
+
+const handlePhoto = (e) => {
+    setNewProduct({...newProduct, image: e.target.files[0]});
+    setPicture(URL.createObjectURL(e.target.files[0]) );
+}
+
+//Sending data
+const axiosProvider = require("axios").create({
+    timeout: 120000, // 2 min
+    baseURL:'http://localhost:5000'
+});
+
+const datas = (data, arg = "application/json") => {
+    if (arg === "application/json") {
+        return JSON.stringify(data);
+    } else if (arg === "multipart/form-data") {
+        const formData = new FormData();
+        Object.keys(data).forEach((key) => {
+        formData.append(key, data[key]);
+        });
+        return formData;
+    } else {
+        return data;
+    }
+};
+
+const sendProduct = async (params) => {
+    const result =  await axiosProvider({
+        method: "POST",
+        url: "/produits/update/"+id,
+        data: datas(params, "multipart/form-data"),
+        headers: { 'Access-Control-Allow-Origin': true }
+    });
+    return result;
+}
+
+const handleSubmit = async (event) => {
+    event.preventDefault();
+    await sendProduct(newProduct)
+    history.push('/admin');
+}
 
    return(
     <div className="product-edit">
