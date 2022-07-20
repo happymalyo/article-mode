@@ -19,6 +19,15 @@ const Product = () => {
 
     console.log(products);
 
+	const handleDelete = (id) => {
+        fetch('http://localhost:5000/produits/delete/'+id, {
+            method: 'DELETE'
+        }).then(_ => {
+            console.log('product deleted');
+            setProduct(products.filter((e) => e._id !==  id))
+        })
+    }
+
     return(
        
             
@@ -145,7 +154,7 @@ const Product = () => {
                                         class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
                                         <span aria-hidden
                                             class="absolute inset-0 bg-red-200 opacity-50 rounded-full"></span>
-									    <span class="relative">delete</span>
+									    <span class="relative cursor-pointer" onClick={() => handleDelete(product._id)}>delete</span>
 									</span>
 								</td>
 							</tr>
