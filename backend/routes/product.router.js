@@ -97,6 +97,7 @@ router.post('/update/:id', upload.single('image'),async (req, res) =>{
 
             product.save().then(() => {
                 console.log('hey updated')
+                res.send(product);
             }).catch((err) => {
                 console.log(err)
             })
