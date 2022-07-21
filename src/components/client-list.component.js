@@ -33,10 +33,10 @@ return(
 		<div class=" flex items-center justify-between pb-6">
 				<div>
 					<button class=" mr-2 bg-indigo-200 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-						<Link to='clients/list' className=" text-black dark:text-gray-200">Clients</Link>
+						<Link to='/clients/list' className=" text-black dark:text-gray-200">Clients</Link>
 					</button>
 					<button class="mr-2 bg-indigo-200 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">
-						<Link to='clients/admin' className=" text-black dark:text-gray-200">Produit</Link>
+						<Link to='/admin' className=" text-black dark:text-gray-200">Produits</Link>
 					</button>
 				</div>
 				<div class="flex items-center justify-between">
@@ -50,7 +50,7 @@ return(
 						<input class="bg-gray-50 outline-none ml-1 block " type="text" name="" id="" placeholder="search..."/>
 					</div>
 						<div class="lg:ml-40 ml-10 space-x-8">
-							<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"> <Link to='client/create' className="mr-2 text-black dark:text-gray-200">Nouvau client</Link></button>
+							<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer"> <Link to='/clients/create' className="mr-2 text-black dark:text-gray-200">Nouveau client</Link></button>
 						</div>
 				</div>
 		</div>
