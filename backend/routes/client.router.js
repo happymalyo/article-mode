@@ -42,4 +42,16 @@ router.post('/add', async(req, res) => {
     }
 })
 
+//Delete by ID Method
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await Client.findByIdAndDelete(id)
+        res.send(`Client nommé ${data.nom} has been deleted..`)
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message })
+    }
+})
+
 module.exports = router;
