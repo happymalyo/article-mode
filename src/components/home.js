@@ -3,6 +3,7 @@ import "../css/home.css";
 import useFetch from './useFetch';
 import {useState, useEffect} from 'react';
 import Header from './header';
+import config from '../config/config.json';
 const HomePage = () => {
     const {data, isPending, error} = useFetch('http://localhost:5000/produits');
     const [products, setProduct] = useState("");
@@ -23,12 +24,12 @@ const HomePage = () => {
                             {
                                 product.image &&
                                 <img
-                                src={`/images/${product.image}`} 
+                                src={`${config.base_url}/images/${product.image}`} 
                                 alt={`${product.image}`}
                                 />
                             }
                             <div class="prod-infos">{product.article} de Marque <a href="#">{product.marque}</a></div>
-                            <div class="price">{product.prix}</div>
+                            <div class="price">{product.prix+' MGA'}</div>
                             <Link to={`/produits/details/${product._id}`} className="details mr-2 text-black dark:text-gray-200">details</Link>
                         </div>
                    ))}
