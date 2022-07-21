@@ -1,6 +1,7 @@
 import useFetch from './useFetch';
 import {Link} from 'react-router-dom';
 import {useState, useEffect} from 'react';
+import config from '../config/config.json';
 import '../index.css';
 // import 'bootstrap/dist/css/bootstrap.css';
 
@@ -105,7 +106,7 @@ return(
 										<div class="flex items-center">
 											<div class="flex-shrink-0 w-10 h-10">
 												<img class="w-full h-full rounded-full"
-													src={`../images/${product.image}`}
+													src={`${config.base_url}/images/${product.image}`}
 													alt={product.image} />
 											</div>
 										</div>

@@ -9,6 +9,7 @@ import EditClient from './components/edit-client.component';
 import CreateProduct from './components/add-product.component';
 import CreateClient from './components/add-client.component';
 import Client from './components/client-list.component';
+import Details from './components/product-details.component';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
             <Route path="/produits/create">
               <CreateProduct />
             </Route>
+            <Route exact path="/produits/details/:id">
+             <Details />
+            </Route> 
             <Route path="/clients/create">
               <CreateClient />
             </Route>

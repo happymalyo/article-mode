@@ -15,6 +15,8 @@ mongoose.connect(
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use('/images', express.static('./assets/images'))
+
 //Product endpoint
 const productRouter = require('./routes/product.router');
 app.use('/produits',productRouter);
@@ -24,4 +26,4 @@ const clientRouter = require('./routes/client.router');
 app.use('/clients',clientRouter);
 
 //Listening server
-app.listen(5000)
+app.listen(5000) 

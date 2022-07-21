@@ -23,13 +23,13 @@ const HomePage = () => {
                             {
                                 product.image &&
                                 <img
-                                src={`../images/${product.image}`} 
+                                src={`/images/${product.image}`} 
                                 alt={`${product.image}`}
                                 />
                             }
                             <div class="prod-infos">{product.article} de Marque <a href="#">{product.marque}</a></div>
                             <div class="price">{product.prix}</div>
-                            <div class="details"><a href="detailsFille.html">Details</a></div>
+                            <Link to={`/produits/details/${product._id}`} className="details mr-2 text-black dark:text-gray-200">details</Link>
                         </div>
                    ))}
             </div>
