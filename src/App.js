@@ -6,6 +6,7 @@ import NotFound from "./NotFound";
 import Product from './components/product-list.component';
 import EditProduct from './components/edit-product.component';
 import CreateProduct from './components/add-product.component';
+import Client from './components/client-list.component';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
             </Route>
             <Route path="/admin">
             <Product/>
+            </Route>
+            <Route path="/clients/list">
+              <Client/>
             </Route>
             <Route path="/produits/create">
               <CreateProduct />

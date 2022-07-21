@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
 })
 
 //Submit resource
-router.post('/', async(req, res) => {
+router.post('/add', async(req, res) => {
     const client = new Client({
         nom: req.body.nom,
         prenom: req.body.prenom,
