@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import NotFound from "./NotFound";
 import Product from './components/product-list.component';
 import EditProduct from './components/edit-product.component';
+import EditClient from './components/edit-client.component';
 import CreateProduct from './components/add-product.component';
 import CreateClient from './components/add-client.component';
 import Client from './components/client-list.component';
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route exact path="/produits/edit/:id">
              <EditProduct/>
+            </Route>
+            <Route exact path="/clients/edit/:id">
+             <EditClient/>
             </Route>
             <Route exact path="*">
                 <NotFound />

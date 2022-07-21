@@ -42,6 +42,22 @@ router.post('/add', async(req, res) => {
     }
 })
 
+//Update resource
+router.patch('/update/:id', async (req,res)=> {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const options = { new: true };
+
+        const dataUpdated = await Client.findByIdAndUpdate(
+            id, data, options
+        )
+        res.send(dataUpdated);
+    }catch(err){
+        res.json({message:err.message});
+    }
+})
+
 //Delete by ID Method
 router.delete('/delete/:id', async (req, res) => {
     try {
